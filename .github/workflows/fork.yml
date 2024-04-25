@@ -12,19 +12,25 @@ jobs:
     steps:
       - uses: actions/checkout@main
         with:
+          path: mwp
+          
+      - uses: actions/checkout@main
+        with:
           repository: goofw/mw
+          path: mw
 
       - uses: actions/setup-node@main
       
       - run: |
-          cd /tmp && git clone https://github.com/goofw/mwp && cd -
-          cd /tmp/mwp
+          cd mwp
           npm i -g pnpm
           pnpm install --frozen-lockfile
           pnpm build
           cd -
-          diff /tmp/mwp/lib/index.js providers.js
-          cp /tmp/mwp/lib/index.js providers.js
+
+          cd mw
+          diff ../mwp/lib/index.js providers.js
+          cp ../mwp/lib/index.js providers.js
           
           git config user.name $(git log -1 --pretty=format:'%an')
           git config user.email $(git log -1 --pretty=format:'%ae')
