@@ -1,0 +1,38 @@
+name: update-fork
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - fork
+    
+jobs:        
+  update-fork:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+        with:
+          repository: goofw/mw
+
+      - uses: actions/setup-node@main
+      
+      - run: |
+          cd /tmp && git clone https://github.com/goofw/mwp && cd -
+          cd /tmp/mwp
+          npm i -g pnpm
+          pnpm install --frozen-lockfile
+          pnpm build
+          cd -
+          diff /tmp/mwp/lib/index.js providers.js
+          cp /tmp/mwp/lib/index.js providers.js
+          
+          git config user.name $(git log -1 --pretty=format:'%an')
+          git config user.email $(git log -1 --pretty=format:'%ae')
+          git add .
+          git diff-index --quiet HEAD || git commit -m "update sing-box $version"
+          git push
+          
+      - uses: Mattraks/delete-workflow-runs@main
+        with:
+          retain_days: 1
+          keep_minimum_runs: 5
