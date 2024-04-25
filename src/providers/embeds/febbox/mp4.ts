@@ -14,7 +14,7 @@ export const febboxMp4Scraper = makeEmbed({
 
     if (type === 'movie') {
       apiQuery = {
-        uid: '',
+        uid: '20011636',
         module: 'Movie_downloadurl_v3',
         mid: id,
         oss: '1',
@@ -22,7 +22,7 @@ export const febboxMp4Scraper = makeEmbed({
       };
     } else if (type === 'show') {
       apiQuery = {
-        uid: '',
+        uid: '20011636',
         module: 'TV_downloadurl_v3',
         tid: id,
         season,

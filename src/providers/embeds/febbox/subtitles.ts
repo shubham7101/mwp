@@ -31,7 +31,7 @@ export async function getSubtitles(
   const module = type === 'movie' ? 'Movie_srt_list_v2' : 'TV_srt_list_v2';
   const subtitleApiQuery = {
     fid,
-    uid: '',
+    uid: '20011636',
     module,
     mid: type === 'movie' ? id : undefined,
     tid: type !== 'movie' ? id : undefined,

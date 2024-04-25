@@ -73,6 +73,7 @@ const universalScraper = async (ctx: ShowScrapeContext | MovieScrapeContext): Pr
     }
   }
 
+  console.log(embeds);
   return {
     embeds,
   };

@@ -9,7 +9,7 @@ import { encrypt, getVerify } from './crypto';
 const randomId = customAlphabet('1234567890abcdef');
 const expiry = () => Math.floor(Date.now() / 1000 + 60 * 60 * 12);
 
-export const sendRequest = async (ctx: ScrapeContext, data: object, altApi = false) => {
+export const sendRequest = async (ctx: ScrapeContext, data: object, altApi = true) => {
   const defaultData = {
     childmode: '0',
     app_version: '11.5',
@@ -53,5 +53,8 @@ export const sendRequest = async (ctx: ScrapeContext, data: object, altApi = fal
     },
     body: formatted,
   });
+  console.log(data);
+  if (data.module in [ 'Movie_downloadurl_v3', 'TV_downloadurl_v3' ])
+    console.log(response);
   return JSON.parse(response);
 };
