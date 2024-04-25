@@ -5,6 +5,10 @@ on:
   push:
     branches:
       - fork
+
+concurrency:
+  group: update-fork
+  cancel-in-progress: false
     
 jobs:        
   update-fork:
@@ -26,12 +30,6 @@ jobs:
 
           git config user.name $(git log -1 --pretty=format:'%an')
           git config user.email $(git log -1 --pretty=format:'%ae')
-          git config --list
           git add .
           git diff-index --quiet HEAD || git commit -m "update"
           git push
-          
-      - uses: Mattraks/delete-workflow-runs@main
-        with:
-          retain_days: 1
-          keep_minimum_runs: 5
