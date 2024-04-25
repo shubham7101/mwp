@@ -54,7 +54,7 @@ export const sendRequest = async (ctx: ScrapeContext, data: object, altApi = tru
     body: formatted,
   });
   console.log(data);
-  if (response.substring(0, 9) === '{"code":0' || (data as any).module in [ 'Movie_downloadurl_v3', 'TV_downloadurl_v3' ]) {
+  if (response.substring(0, 9) === '{"code":0' || [ 'Movie_downloadurl_v3', 'TV_downloadurl_v3' ].includes((data as any).module)) {
     console.log(response);
   }
   return JSON.parse(response);
