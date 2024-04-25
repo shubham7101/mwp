@@ -16,7 +16,7 @@ async function comboScraper(ctx: ShowScrapeContext | MovieScrapeContext): Promis
     pagelimit: '20',
   };
 
-  const searchRes = (await sendRequest(ctx, searchQuery, true)).data.list;
+  const searchRes = (await sendRequest(ctx, searchQuery, true)).data;
   ctx.progress(50);
 
   const showboxEntry = searchRes.find(
