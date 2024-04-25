@@ -11,27 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
-        with:
-          path: mwp
-          
-      - uses: actions/checkout@main
-        with:
-          repository: goofw/mw
-          path: mw
-
       - uses: actions/setup-node@main
       
-      - run: |
-          cd mwp
+      - env:
+          PAT_FOR_MW: ${{ secrets.PAT_FOR_MW }}
+        run: |
           npm i -g pnpm
-          pnpm install --frozen-lockfile
+          pnpm i --frozen-lockfile
           pnpm build
-          cd -
 
+          git clone https://$PAT_FOR_MW@github.com/goofw/mw
           cd mw
-          cp ../mwp/lib/index.js providers.js
+          cp ../lib/index.js providers.js
 
-          set -x
           git config user.name $(git log -1 --pretty=format:'%an')
           git config user.email $(git log -1 --pretty=format:'%ae')
           git config --list
