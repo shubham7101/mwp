@@ -9,7 +9,7 @@ import { sendRequest } from './sendRequest';
 
 async function comboScraper(ctx: ShowScrapeContext | MovieScrapeContext): Promise<SourcererOutput> {
   const searchQuery = {
-    module: 'Search4',
+    module: 'Search5',
     page: '1',
     type: 'all',
     keyword: ctx.media.title,
