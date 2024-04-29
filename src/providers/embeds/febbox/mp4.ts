@@ -3,6 +3,7 @@ import { makeEmbed } from '@/providers/base';
 import { parseInputUrl } from '@/providers/embeds/febbox/common';
 import { getStreamQualities } from '@/providers/embeds/febbox/qualities';
 import { getSubtitles } from '@/providers/embeds/febbox/subtitles';
+import { uid } from '@/providers/sources/showbox/common';
 
 export const febboxMp4Scraper = makeEmbed({
   id: 'febbox-mp4',
@@ -14,7 +15,7 @@ export const febboxMp4Scraper = makeEmbed({
 
     if (type === 'movie') {
       apiQuery = {
-        uid: '20011636',
+        uid: uid,
         module: 'Movie_downloadurl_v3',
         mid: id,
         oss: '1',
@@ -22,7 +23,7 @@ export const febboxMp4Scraper = makeEmbed({
       };
     } else if (type === 'show') {
       apiQuery = {
-        uid: '20011636',
+        uid: uid,
         module: 'TV_downloadurl_v3',
         tid: id,
         season,

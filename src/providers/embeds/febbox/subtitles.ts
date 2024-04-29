@@ -4,7 +4,7 @@ import {
   isValidLanguageCode,
   removeDuplicatedLanguages as removeDuplicateLanguages,
 } from '@/providers/captions';
-import { captionsDomains } from '@/providers/sources/showbox/common';
+import { captionsDomains, uid } from '@/providers/sources/showbox/common';
 import { sendRequest } from '@/providers/sources/showbox/sendRequest';
 import { ScrapeContext } from '@/utils/context';
 
@@ -31,7 +31,7 @@ export async function getSubtitles(
   const module = type === 'movie' ? 'Movie_srt_list_v2' : 'TV_srt_list_v2';
   const subtitleApiQuery = {
     fid,
-    uid: '20011636',
+    uid: uid,
     module,
     mid: type === 'movie' ? id : undefined,
     tid: type !== 'movie' ? id : undefined,
