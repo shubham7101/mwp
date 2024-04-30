@@ -12,6 +12,7 @@ export const fileMoonScraper = makeEmbed({
   id: 'filemoon',
   name: 'Filemoon',
   rank: 300,
+  disabled: true,
   scrape: async (ctx) => {
     const embedRes = await ctx.proxiedFetcher<string>(ctx.url, {
       headers: {
