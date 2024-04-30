@@ -26,7 +26,9 @@ jobs:
 
           git clone https://$PAT_FOR_MW@github.com/goofw/mw
           cd mw
-          cp ../lib/index.js providers.js
+          mkdir -p mwp/lib
+          cp ../package.json mwp
+          cp ../lib/index.js mwp/lib
 
           git config user.name $(git log -1 --pretty=format:'%an')
           git config user.email $(git log -1 --pretty=format:'%ae')
