@@ -29,6 +29,13 @@ jobs:
           mkdir -p mwp/lib
           cp ../package.json mwp
           cp ../lib/index.js mwp/lib
+          node <<"EOF"
+          const { readFileSync, writeFileSync } = require("node:fs");
+          const config = JSON.parse(readFileSync("mwp/package.json"));
+          delete config.scripts;
+          delete config.devDependencies;
+          writeFileSync("mwp/package.json", JSON.stringify(config));
+          EOF
 
           git config user.name $(git log -1 --pretty=format:'%an')
           git config user.email $(git log -1 --pretty=format:'%ae')
